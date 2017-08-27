@@ -1,2 +1,20 @@
-<input type="text" [(ngModel)]="name"/>
-{{name}}
+<h1> Angular Smart dropdown component </h1>
+<div class="wrapper">
+  <dropdown
+    [data]="choicesArray"
+    [(ngModel)]="selectedItems3"
+    title="Select an location"
+    [settings]="choiceSettings"
+  >
+  </dropdown>
+</div>
+<h1 class="div2"> Angular Smart dropdown component with limitation: 2 </h1>
+<div class="wrapper2">
+  <dropdown
+  [data]="choicesArray2"
+  [(ngModel)]="selectedItems2"
+  title="Select an location"
+  [settings]="choiceSettings2"
+  >
+  </dropdown>
+<div>

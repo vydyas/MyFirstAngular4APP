@@ -1,0 +1,22 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+  background: #d6c31b;
+  padding: 20px;
+}
+.heading {
+  display: flex;
+  justify-content: center;
+  background: #d6c31b;
+  padding: 20px;
+}
+h1.div2 {
+  margin-top: 15%;
+}
+.wrapper2 {
+  display: flex;
+  justify-content: center;
+  background: #333;
+  padding: 20px;
+}

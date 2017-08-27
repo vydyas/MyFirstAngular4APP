@@ -1,0 +1,40 @@
+<div class="cloudcherry-dropdown" (clickOutside)="closeDropdown()">
+    <div class="selected-list">
+        <div class="c-btn" (click)="toggleDropdown($event)" [ngClass]="{'disabled': settings.disabled}">
+            <span *ngIf="selectedItems?.length == 0">{{title}}</span>
+            <span *ngIf="settings.singleSelection">
+                <span *ngFor="let item of selectedItems;trackBy: trackByFn;">
+                    {{item.itemName}}
+                </span>
+            </span>
+            <div class="c-list" *ngIf="selectedItems?.length > 0 && !settings.singleSelection">
+                <div class="c-token" *ngFor="let item of selectedItems;trackBy: trackByFn;let k = index" [hidden]="k > settings.badgeShowLimit-1">
+                    <span class="c-label">{{item.itemName}}</span>
+                    <span class="fa fa-remove" (click)="onItemClick(item,k,$event)" disabled="true"></span>
+                </div>
+            </div>
+            <span *ngIf="selectedItems?.length > settings.badgeShowLimit">+{{selectedItems?.length - settings.badgeShowLimit }}</span>
+            <span class="fa" [ngClass]="{'fa-angle-down': !isActive,'fa-angle-up':isActive}"></span>
+        </div>
+    </div>
+    <div class="dropdown-list" [hidden]="!isActive">
+    <div class="list-area">
+        <div class="list-filter" *ngIf="settings.enableSearchFilter">
+            <span class="fa fa-search"></span>
+            <input type="text" [placeholder]="settings.searchPlaceholderText" [(ngModel)]="filter.itemName">
+        </div>
+    <ul [style.maxHeight] = "settings.maxHeight+'px'">
+        <li *ngFor="let item of data | listFilter:filter; let i = index;" (click)="onItemClick(item,i,$event)" class="pure-checkbox">
+            <input type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"/>
+            <label>{{item.itemName}}</label>
+        </li>
+        <li *ngIf="(data | listFilter:filter).length === 0 && filter.itemName!=='' " class="notFound">
+            <label class="notFoundItem">"{{filter.itemName}}" Not Found</label>
+            <button (click)="onItemClick({itemName:filter.itemName})"> Add & Select</button>
+        </li>
+    </ul>
+
+    <h5 class="list-message" *ngIf="data?.length == 0">No Data Available</h5>
+    </div>
+    </div>
+</div>
